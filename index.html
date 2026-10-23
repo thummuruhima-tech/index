@@ -1,0 +1,1635 @@
+const stylesheet = String.raw`
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #18352b;
+  background: #f2f8f4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --green: #079669;
+  --green-dark: #075b43;
+  --green-light: #e5f7ed;
+  --green-accent: #35d98a;
+  --border: #dce9e0;
+  --muted: #71857a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f2f8f4;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 650;
+  transition: transform .18s ease, background .18s ease,
+    box-shadow .18s ease, opacity .18s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #9ce8c1;
+  outline-offset: 3px;
+}
+
+.primary {
+  background: linear-gradient(115deg, #10b981, #07845e);
+  color: white;
+  box-shadow: 0 8px 18px #07966930;
+}
+
+.primary:hover {
+  background: linear-gradient(115deg, #0ba775, #066b4c);
+  box-shadow: 0 10px 24px #07966940;
+}
+
+.secondary {
+  background: #e6f5ec;
+  color: #08744f;
+}
+
+.secondary:hover {
+  background: #d7efdf;
+}
+
+.full {
+  width: 100%;
+}
+
+/* LOGIN SCREEN — PHOTO BACKGROUND */
+
+
+.join-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #073d2e;
+  background-image:
+    linear-gradient(
+      125deg,
+      rgba(3, 48, 34, 0.48),
+      rgba(6, 104, 72, 0.20)
+    ),
+    url("/images/proxispeak-office.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.join-card {
+  background: rgba(255, 255, 255, .96);
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 24px;
+  padding: 36px;
+  width: min(100%, 460px);
+  box-shadow: 0 24px 80px rgba(0, 40, 25, .25);
+  backdrop-filter: blur(14px);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #64f28b, #00a875);
+  color: #fff;
+  font-weight: 850;
+  letter-spacing: -1px;
+  font-size: 19px;
+  box-shadow: 0 8px 22px #07966935;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  font-weight: 800;
+  color: var(--green);
+  margin: 22px 0 8px;
+}
+
+.join-card h1 {
+  font-size: 31px;
+  letter-spacing: -1.2px;
+  margin: 0 0 10px;
+  color: #19352a;
+}
+
+.join-card h1 span {
+  color: var(--green);
+}
+
+.muted {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.join-card form {
+  display: grid;
+  gap: 17px;
+  margin-top: 26px;
+}
+
+.join-card label {
+  font-size: 13px;
+  font-weight: 700;
+  display: grid;
+  gap: 8px;
+  color: #264438;
+}
+
+.join-card input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #d5e5da;
+  border-radius: 11px;
+  outline: none;
+  background: #f9fcfa;
+  color: #18352b;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.join-card input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px #07966920;
+  background: #fff;
+}
+
+.join-card .primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.tiny {
+  font-size: 11px;
+  color: #7b9083;
+  line-height: 1.6;
+  margin-top: 22px;
+}
+
+.status {
+  font-size: 12px;
+  color: #527364;
+  line-height: 1.5;
+}
+
+.join-card .status {
+  margin-bottom: 0;
+}
+
+/* MAIN APPLICATION */
+
+.app-shell {
+  min-height: 100vh;
+  background: #f2f8f4;
+}
+
+.topbar {
+  height: 76px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0 clamp(18px, 4vw, 58px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark.small {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  font-size: 15px;
+}
+
+.brand strong,
+.brand span {
+  display: block;
+}
+
+.brand strong {
+  font-size: 15px;
+}
+
+.brand span {
+  font-size: 11px;
+  color: #82968a;
+  margin-top: 3px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.connection {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: #71857a;
+}
+
+.connection i,
+.live-pill i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b5c5bb;
+}
+
+.connection.online i,
+.live-pill i {
+  background: #16b978;
+}
+
+.connection.online i {
+  box-shadow: 0 0 0 4px #16b97818;
+}
+
+.content {
+  max-width: 1500px;
+  margin: auto;
+  padding: 30px clamp(16px, 4vw, 58px);
+}
+
+.welcome-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.welcome-row .eyebrow {
+  margin: 0 0 8px;
+}
+
+.welcome-row h1 {
+  font-size: 29px;
+  letter-spacing: -.8px;
+  margin: 0;
+  color: #18352b;
+}
+
+.welcome-row .muted {
+  margin: 7px 0 0;
+  font-size: 13px;
+}
+
+.keyboard-hint {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 15px;
+  font-size: 11px;
+  color: #71857a;
+  white-space: nowrap;
+}
+
+.keyboard-hint span {
+  font-size: 17px;
+  margin-right: 8px;
+}
+
+.keyboard-hint b {
+  background: #eaf5ed;
+  border: 1px solid #d8e9dd;
+  border-radius: 5px;
+  padding: 3px 5px;
+  color: #28654b;
+  margin-left: 3px;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(280px, .8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.office-card,
+.panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 5px 20px #16432c08;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+.office-card:hover,
+.panel:hover {
+  border-color: #c6e2d0;
+  box-shadow: 0 10px 28px #16432c0d;
+}
+
+.office-card {
+  padding: 20px;
+}
+
+.card-heading,
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-heading h2,
+.panel-heading h2 {
+  font-size: 14px;
+  margin: 0;
+  color: #234638;
+}
+
+.card-heading p {
+  font-size: 11px;
+  color: #83958a;
+  margin: 5px 0 0;
+}
+
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #e5f8ed;
+  color: #08794e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 7px;
+  padding: 7px 9px;
+}
+
+.live-pill i {
+  width: 6px;
+  height: 6px;
+}
+
+/* OFFICE MAP — PRESERVE AVATAR POSITIONING */
+
+.office-map {
+  position: relative;
+  margin-top: 18px;
+  aspect-ratio: 800 / 500;
+  min-height: 330px;
+  overflow: hidden;
+  border: 1px solid #d5e7dc;
+  border-radius: 12px;
+  background-color: #f8fcf9;
+  background-image:
+    linear-gradient(#e0eee5 1px, transparent 1px),
+    linear-gradient(90deg, #e0eee5 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+.room {
+  position: absolute;
+  border: 2px solid #cde3d4;
+  border-radius: 8px;
+  background: #eff8f1;
+}
+
+.room > span {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  color: #739783;
+}
+
+.room-one {
+  left: 3%;
+  top: 5%;
+  width: 38%;
+  height: 41%;
+}
+
+.room-two {
+  right: 3%;
+  top: 5%;
+  width: 52%;
+  height: 41%;
+}
+
+.room-three {
+  left: 3%;
+  bottom: 5%;
+  width: 48%;
+  height: 39%;
+}
+
+.room-four {
+  right: 3%;
+  bottom: 5%;
+  width: 42%;
+  height: 39%;
+}
+
+.couch {
+  position: absolute;
+  left: 24%;
+  top: 37%;
+  width: 45%;
+  height: 31%;
+  border: 5px solid #8fd4ad;
+  border-radius: 12px;
+  background: #d8f2e1;
+}
+
+.plant {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  color: #16875b;
+  font-size: 25px;
+}
+
+.desk {
+  position: absolute;
+  top: 32%;
+  left: 13%;
+  width: 28%;
+  height: 39%;
+  background: #e0eee4;
+  border: 2px solid #c2dccb;
+  border-radius: 5px;
+}
+
+.desk.second {
+  left: 58%;
+}
+
+.desk i {
+  display: block;
+  width: 23px;
+  height: 23px;
+  background: #c1dfcc;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+.meeting-table {
+  position: absolute;
+  left: 20%;
+  top: 35%;
+  width: 58%;
+  height: 30%;
+  border-radius: 30px;
+  background: #e0f0e5;
+  border: 2px solid #c1ddca;
+}
+
+.round-table {
+  position: absolute;
+  left: 37%;
+  top: 32%;
+  width: 28%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #d9f4e2;
+  border: 2px solid #a9dcbc;
+}
+
+.avatar {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: left .06s linear, top .06s linear;
+  pointer-events: none;
+}
+
+.avatar-face {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: #f6a96c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  border: 3px solid white;
+  box-shadow: 0 3px 9px #25304a22;
+}
+
+.avatar > span {
+  font-size: 9px;
+  font-weight: 750;
+  color: #304b3d;
+  background: #fff;
+  border: 1px solid #dce9e0;
+  border-radius: 5px;
+  padding: 3px 5px;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px #1f2a4410;
+}
+
+.avatar.self .avatar-face {
+  background: #079669;
+  box-shadow: 0 0 0 4px #07966925;
+}
+
+.avatar.nearby .avatar-face {
+  box-shadow: 0 0 0 4px #25be852b;
+}
+
+.empty-map {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #82978a;
+  font-size: 12px;
+}
+
+.map-footer {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  font-size: 10px;
+  color: #71857a;
+}
+
+.map-footer span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.map-footer i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.legend-self {
+  background: #079669;
+}
+
+.legend-near {
+  background: #25be85;
+}
+
+.legend-other {
+  background: #f6a96c;
+}
+
+/* SIDEBAR */
+
+.side-column {
+  display: grid;
+  gap: 16px;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.count {
+  min-width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: #e5f7ed;
+  color: #08794e;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.people-list {
+  margin-top: 12px;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid #edf4ef;
+}
+
+.person:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.person-avatar {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #ffeadb;
+  color: #a96a3a;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.person-avatar.me {
+  background: #d9f4e3;
+  color: #08794e;
+}
+
+.person-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.person-info strong,
+.person-info span {
+  display: block;
+}
+
+.person-info strong {
+  font-size: 11px;
+}
+
+.person-info span {
+  font-size: 10px;
+  color: #83958a;
+  margin-top: 4px;
+}
+
+.person-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #24bd83;
+}
+
+.audio-icon {
+  font-size: 19px;
+  color: #079669;
+}
+
+.small-text {
+  font-size: 11px;
+  margin: 10px 0 14px;
+}
+
+.audio-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  font-size: 10px;
+  color: #71857a;
+}
+
+.good-dot,
+.neutral-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22bd83;
+}
+
+.neutral-dot {
+  background: #b7c8bd;
+}
+
+.nearby-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #eaf9f0;
+  border: 1px solid #d7efdf;
+}
+
+.wave {
+  font-size: 15px;
+  letter-spacing: -4px;
+  color: #11996b;
+  transform: rotate(180deg);
+}
+
+.nearby-person strong {
+  font-size: 11px;
+}
+
+.nearby-person p {
+  font-size: 10px;
+  color: #71857a;
+  margin: 4px 0 0;
+}
+
+.nearby-empty {
+  text-align: center;
+  padding: 17px 0 6px;
+}
+
+.nearby-empty > span {
+  font-size: 28px;
+  color: #b7d5c2;
+}
+
+.nearby-empty p {
+  font-size: 11px;
+  font-weight: 700;
+  margin: 8px 0 5px;
+}
+
+.nearby-empty small {
+  font-size: 10px;
+  color: #83958a;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  color: #8ba094;
+  font-size: 10px;
+}
+
+.bottom-status {
+  margin-top: 8px;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 950px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .side-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proximity-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 650px) {
+  .topbar {
+    height: 66px;
+    padding: 0 16px;
+  }
+
+  .top-actions {
+    gap: 8px;
+  }
+
+  .connection {
+    display: none;
+  }
+
+  .secondary {
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  .content {
+    padding: 22px 14px;
+  }
+
+  .welcome-row {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .welcome-row h1 {
+    font-size: 25px;
+  }
+
+  .keyboard-hint {
+    white-space: normal;
+    line-height: 2;
+    width: 100%;
+  }
+
+  .office-card {
+    padding: 12px;
+  }
+
+  .office-map {
+    min-height: 300px;
+  }
+
+  .side-column {
+    grid-template-columns: 1fr;
+  }
+
+  .proximity-panel {
+    grid-column: auto;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .join-screen {
+    padding: 18px;
+    background-position: center;
+  }
+
+  .join-card {
+    padding: 25px;
+  }
+
+  .join-card h1 {
+    font-size: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: .01ms !important;
+  }
+}
+/* ProxiSpeak split-screen login: append to the END of client/src/style.css */
+.join-screen.join-split-screen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(420px, .95fr);
+  place-items: stretch;
+  gap: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #eaf5ec;
+  overflow: hidden;
+}
+
+.join-welcome-panel {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: clamp(32px, 5vw, 76px);
+  color: #fff;
+  background:
+    linear-gradient(115deg, rgba(3, 43, 30, .88), rgba(5, 92, 61, .53)),
+    url("/images/proxispeak-office.jpg") center / cover no-repeat;
+}
+
+.join-brand-lockup,
+.join-form-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.join-brand-lockup .brand-mark,
+.join-form-brand .brand-mark {
+  flex: 0 0 auto;
+}
+
+.join-brand-name {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 850;
+  letter-spacing: -1px;
+  color: inherit;
+  line-height: 1.1;
+}
+
+.join-brand-name span {
+  color: #36d98b;
+}
+
+.join-brand-lockup p,
+.join-form-brand p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: inherit;
+  opacity: .8;
+}
+
+.join-welcome-copy {
+  max-width: 570px;
+  margin: 50px 0;
+}
+
+.join-kicker {
+  margin: 0 0 16px;
+  color: #76efae;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 2.5px;
+}
+
+.join-welcome-copy h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(42px, 5.1vw, 70px);
+  letter-spacing: -2.5px;
+  line-height: 1.04;
+}
+
+.join-welcome-copy h1 span {
+  color: #42e795;
+}
+
+.join-description {
+  max-width: 470px;
+  margin: 22px 0 30px;
+  color: rgba(255,255,255,.88);
+  font-size: clamp(14px, 1.25vw, 18px);
+  line-height: 1.7;
+}
+
+.join-feature-list {
+  display: grid;
+  gap: 17px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.join-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.join-feature-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 13px;
+  color: #fff;
+  background: rgba(49, 207, 128, .28);
+  border: 1px solid rgba(255,255,255,.2);
+  font-size: 19px;
+}
+
+.join-welcome-footer {
+  margin: 0;
+  color: rgba(255,255,255,.7);
+  font-size: 11px;
+  letter-spacing: .3px;
+}
+
+
+.join-form-panel {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 100%;
+  padding: clamp(22px, 4vw, 64px);
+
+  background: linear-gradient(
+    135deg,
+    #d1fae5 0%,
+    #bbf7d0 45%,
+    #a7f3d0 100%
+  ) !important;
+}
+
+
+
+
+.join-form-panel .join-card {
+  width: min(100%, 520px);
+  padding: clamp(25px, 3.4vw, 44px);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 25px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 24px 75px rgba(16, 70, 39, .12);
+  backdrop-filter: blur(12px);
+}
+
+.join-form-brand {
+  color: #172b25;
+  margin-bottom: 34px;
+}
+
+.join-form-panel .eyebrow {
+  margin: 0 0 12px;
+  color: #079669;
+  letter-spacing: 2.4px;
+}
+
+.join-form-panel .join-card h2 {
+  margin: 0 0 12px;
+  color: #182b23;
+  font-size: clamp(27px, 2.5vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+}
+
+.join-form-panel .join-card h2 span {
+  color: #079669;
+}
+
+.join-form-panel .muted {
+  margin: 0;
+  font-size: 14px;
+}
+
+.join-form-panel .join-card form {
+  margin-top: 27px;
+  gap: 18px;
+}
+
+.join-form-panel .join-card label {
+  color: #20392d;
+  font-size: 13px;
+}
+
+.join-form-panel .join-card input {
+  min-height: 48px;
+  padding: 13px 15px;
+  border-color: #d8e6dc;
+  background: #fbfdfb;
+}
+
+.join-form-panel .join-card input:focus {
+  border-color: #079669;
+  box-shadow: 0 0 0 4px rgba(7,150,105,.12);
+}
+
+.join-form-panel .join-submit {
+  min-height: 54px;
+  margin-top: 3px;
+  padding: 14px 18px;
+  border-radius: 13px;
+  font-size: 15px;
+}
+
+.join-ready-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 25px;
+  color: #243b30;
+}
+
+.join-ready-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 4px #10b9811c;
+}
+
+.join-ready-status strong {
+  display: block;
+  font-size: 12px;
+}
+
+.join-ready-status p {
+  margin: 5px 0 0;
+  color: #75877b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.join-form-status {
+  margin: 15px 0 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .join-screen.join-split-screen {
+    grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+  }
+  .join-welcome-panel {
+    background-color: #103d30;
+background-image:
+  linear-gradient(
+    135deg,
+    rgba(9, 38, 31, 0.45),
+    rgba(17, 75, 57, 0.25)
+  ),
+  url("/images/proxispeak-office.jpg");
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+  }
+  .join-welcome-copy h1 {
+    font-size: clamp(38px, 5vw, 52px);
+  }
+}
+
+@media (max-width: 700px) {
+  .join-screen.join-split-screen {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  .join-welcome-panel {
+    min-height: auto;
+    padding: 28px 24px 30px;
+  }
+  .join-welcome-copy {
+    margin: 42px 0 26px;
+  }
+  .join-welcome-copy h1 {
+    font-size: clamp(40px, 10vw, 58px);
+  }
+  .join-description {
+    margin: 16px 0 22px;
+  }
+  .join-feature-list {
+    gap: 12px;
+  }
+  .join-welcome-footer {
+    display: none;
+  }
+  .join-form-panel {
+    padding: 24px 16px;
+  }
+  .join-form-panel .join-card {
+    padding: 26px 22px;
+  }
+  .join-form-brand {
+    margin-bottom: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .join-form-panel *,
+  .join-welcome-panel * {
+    transition: none !important;
+  }
+}
+
+/* PROXISPEAK — FIT LOGIN TO VIEWPORT */
+
+.join-screen {
+  min-height: 100vh;
+  min-height: 100svh;
+  height: 100svh;
+  padding: 12px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Compact login card */
+.join-card {
+  width: min(100%, 500px);
+  padding: clamp(18px, 2.5vh, 28px) clamp(20px, 3vw, 32px);
+  border-radius: 22px;
+  max-height: calc(100svh - 24px);
+  overflow-y: auto;
+}
+
+/* Reduce vertical gaps */
+.join-card .eyebrow {
+  margin: 14px 0 6px;
+}
+
+.join-card h1 {
+  font-size: clamp(23px, 2.2vw, 30px);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.join-card form {
+  gap: 11px;
+  margin-top: 17px;
+}
+
+.join-card label {
+  gap: 6px;
+}
+
+.join-card input {
+  padding: 11px 13px;
+}
+
+.join-card .primary {
+  min-height: 44px;
+  margin-top: 2px;
+}
+
+.join-card .tiny {
+  margin-top: 12px;
+}
+
+/* Smaller logo on compact screens */
+.join-card .brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+}
+
+/* Keep the split layout within the screen height */
+@media (max-height: 720px) {
+  .join-card {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .join-card .eyebrow {
+    margin-top: 10px;
+  }
+
+  .join-card form {
+    gap: 9px;
+    margin-top: 12px;
+  }
+
+  .join-card .tiny {
+    margin-top: 8px;
+  }
+}
+
+/* Mobile layout can scroll if necessary */
+@media (max-width: 650px) {
+  .join-screen {
+    height: auto;
+    min-height: 100svh;
+    overflow: auto;
+    padding: 16px;
+  }
+
+  .join-card {
+    max-height: none;
+    width: 100%;
+    padding: 22px;
+  }
+}
+
+/* FINAL LOGIN SCREEN FIX */
+
+.join-screen {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.join-card {
+  width: min(100%, 500px);
+  max-height: none;
+  height: auto;
+  overflow: visible;
+  padding: 24px 30px;
+  border-radius: 22px;
+}
+
+/* Compact logo */
+.join-card .brand-mark {
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+}
+
+/* Reduce vertical spacing */
+.join-card .eyebrow {
+  margin: 12px 0 6px;
+}
+
+.join-card h1 {
+  font-size: clamp(23px, 2vw, 29px);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.join-card .muted {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.join-card form {
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.join-card label {
+  gap: 5px;
+  font-size: 12px;
+}
+
+.join-card input {
+  padding: 10px 12px;
+}
+
+.join-card .primary {
+  min-height: 42px;
+  margin-top: 2px;
+}
+
+.join-card .status {
+  font-size: 11px;
+}
+
+.join-card .tiny {
+  margin-top: 8px;
+  font-size: 10px;
+}
+
+/* Short laptop screens */
+@media (max-height: 760px) and (min-width: 651px) {
+  .join-card {
+    padding: 16px 26px;
+  }
+
+  .join-card .eyebrow {
+    margin-top: 8px;
+  }
+
+  .join-card form {
+    margin-top: 10px;
+    gap: 7px;
+  }
+
+  .join-card .tiny {
+    margin-top: 5px;
+  }
+}
+
+/* Mobile: allow natural page scrolling */
+@media (max-width: 650px) {
+  .join-screen {
+    height: auto;
+    min-height: 100dvh;
+    overflow: auto;
+    padding: 16px;
+  }
+
+  .join-card {
+    width: 100%;
+    max-height: none;
+    padding: 22px;
+  }
+}
+
+
+
+
+/* Keep all welcome panel content above the background */
+.join-screen.join-split-screen > .join-welcome-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Make the welcome text readable */
+.join-welcome-panel h1,
+.join-welcome-panel p,
+.join-welcome-panel li,
+.join-welcome-panel .join-brand-name {
+  color: #ffffff;
+}
+
+
+/* Right-side login background only */
+.join-screen.join-split-screen > .join-form-panel {
+  background: linear-gradient(
+    135deg,
+    #f0fff4 0%,
+    #dcfce7 50%,
+    #ecfdf5 100%
+  ) !important;
+  min-height: 100vh;
+}
+
+/* Force right-side login panel background */
+main.join-screen.join-split-screen section.join-form-panel {
+  background: linear-gradient(
+    135deg,
+    #f0fff4 0%,
+    #dcfce7 50%,
+    #ecfdf5 100%
+  ) !important;
+
+  background-color: #dcfce7 !important;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Keep the login card white */
+main.join-screen.join-split-screen section.join-form-panel .join-card {
+  background: #ffffff !important;
+}
+
+/* ========================================
+   PROXISPEAK — CLEAN, PROFESSIONAL EFFECTS
+   ======================================== */
+
+/* Smooth transitions only on interactive elements */
+.join-screen.join-split-screen .brand-mark,
+.join-screen.join-split-screen .join-feature-icon,
+.join-screen.join-split-screen .join-submit,
+.join-screen.join-split-screen .join-form-panel input {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    filter 180ms ease;
+}
+
+/* Logo: subtle lift */
+@media (hover: hover) and (pointer: fine) {
+  .join-screen.join-split-screen .brand-mark:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Feature icons: small movement */
+  .join-screen.join-split-screen .join-feature-list li:hover
+  .join-feature-icon {
+    transform: translateX(3px);
+    background-color: rgba(52, 211, 153, 0.35);
+  }
+
+  /* Inputs: clean green border */
+  .join-screen.join-split-screen .join-form-panel input:hover {
+    border-color: #86cfa9;
+  }
+
+  /* Join button: gentle lift */
+  .join-screen.join-split-screen .join-submit:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.04);
+    box-shadow: 0 6px 16px rgba(5, 120, 75, 0.18);
+  }
+}
+
+/* Clear keyboard focus for accessibility */
+.join-screen.join-split-screen .join-form-panel input:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+.join-screen.join-split-screen .join-submit:active {
+  transform: scale(0.99);
+}
+
+/* Avoid motion for users who prefer reduced animation */
+@media (prefers-reduced-motion: reduce) {
+  .join-screen.join-split-screen *,
+  .join-screen.join-split-screen *::before,
+  .join-screen.join-split-screen *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+/* Presence status selector */
+.presence-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.presence-control select {
+  padding: 8px 10px;
+  border: 1px solid #d9deea;
+  border-radius: 8px;
+  background: #fff;
+  color: #202638;
+  font: inherit;
+  cursor: pointer;
+}
+
+.presence-control select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Online / away indicators in People here */
+.person-dot.online {
+  background-color: #22c55e;
+}
+
+.person-dot.away {
+  background-color: #f59e0b;
+}
+
+.person-dot.automatic {
+  background-color: #94a3b8;
+}
+
+@media (max-width: 640px) {
+  .top-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .presence-control {
+    flex-wrap: wrap;
+  }
+}`;
+
+module.exports = stylesheet;
+
+const http = require('http');
+
+const page = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaf5ec">
+  <title>ProxiSpeak — Join your workspace</title>
+  <style>${stylesheet}</style>
+</head>
+<body>
+  <main class="join-screen join-split-screen">
+    <section class="join-welcome-panel">
+      <div class="join-brand-lockup">
+        <div class="brand-mark" aria-hidden="true">PS</div>
+        <div>
+          <div class="join-brand-name">Proxi<span>Speak</span></div>
+          <p>Work better, together.</p>
+        </div>
+      </div>
+      <div class="join-welcome-copy">
+        <p class="join-kicker">YOUR TEAM, IN SYNC</p>
+        <h1>Feel closer,<br><span>wherever you work.</span></h1>
+        <p class="join-description">A shared space for easy conversations and focused collaboration.</p>
+        <ul class="join-feature-list">
+          <li><span class="join-feature-icon" aria-hidden="true">⌂</span>Meet naturally in your virtual office</li>
+          <li><span class="join-feature-icon" aria-hidden="true">◉</span>See who's around and available</li>
+          <li><span class="join-feature-icon" aria-hidden="true">⌁</span>Connect with a simple click</li>
+        </ul>
+      </div>
+      <p class="join-welcome-footer">A calmer way to work together.</p>
+    </section>
+    <section class="join-form-panel" aria-labelledby="join-heading">
+      <div class="join-card">
+        <div class="join-form-brand">
+          <div class="brand-mark" aria-hidden="true">PS</div>
+          <div>
+            <div class="join-brand-name">Proxi<span>Speak</span></div>
+            <p>Your virtual office</p>
+          </div>
+        </div>
+        <p class="eyebrow">WELCOME</p>
+        <h2 id="join-heading">Join your <span>workspace</span></h2>
+        <p class="muted">Enter your details to continue to your team.</p>
+        <form id="join-form">
+          <label for="name">Your name
+            <input id="name" name="name" autocomplete="name" placeholder="e.g. Alex Morgan" required>
+          </label>
+          <label for="email">Work email
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+          </label>
+          <button class="primary full join-submit" type="submit">Continue <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="status join-form-status" id="form-status" role="status" aria-live="polite"></p>
+        <p class="tiny">This preview is a UI demo; sign-in is not connected to an authentication service.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.getElementById('join-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      document.getElementById('form-status').textContent =
+        'Your details were not sent. Authentication is not configured in this preview.';
+    });
+  </script>
+</body>
+</html>`;
+
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+  response.end(page);
+});
+
+server.listen(process.env.PORT || 3000);
